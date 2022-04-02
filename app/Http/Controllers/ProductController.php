@@ -2,31 +2,31 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\ProductStoreRequest;
-use App\Http\Requests\ProductUpdateRequest;
-use App\Http\Resources\ProductResource;
-use App\Models\Product;
+use App\Brand;
+use App\Category;
+use App\Product;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
+      public function __construct(){
+
+        $this->middleware('permission:view-product',['only' => ['index']]);
+        $this->middleware('permission:create-product',['only' => ['create','store']]);
+        $this->middleware('permission:update-product',['only' => ['edit','update']]);
+        $this->middleware('permission:delete-product',['only' => ['destroy']]);
+
+    }
+     
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $products = new Product();
-        if ($request->search) {
-            $products = $products->where('name', 'LIKE', "%{$request->search}%");
-        }
-        $products = $products->latest()->paginate(10);
-        if (request()->wantsJson()) {
-            return ProductResource::collection($products);
-        }
-        return view('products.index')->with('products', $products);
+        $products  = Product::paginate(10);
+        return view('backend.product.index',compact('products'));
     }
 
     /**
@@ -36,7 +36,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('products.create');
+        $category = Category::all();
+        return view('backend.product.create',compact('category'));
     }
 
     /**
@@ -45,34 +46,55 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ProductStoreRequest $request)
+    public function store(Request $request)
     {
-        $image_path = '';
-
-        if ($request->hasFile('image')) {
-            $image_path = $request->file('image')->store('products', 'public');
-        }
-
-        $product = Product::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'image' => $image_path,
-            'barcode' => $request->barcode,
-            'price' => $request->price,
-            'quantity' => $request->quantity,
-            'status' => $request->status
+        // dd($request->all());
+        $request->validate([
+            'name' => 'required',
+            'desc' => 'required',
+            'price' => 'required',
+            'quantity' => 'required|integer',
+            'tax' => 'required|integer',
+            'category_id' => 'required|integer',
+            'brands' => 'required|integer',
+            'status' => 'required'
         ]);
 
-        if (!$product) {
-            return redirect()->back()->with('error', 'Sorry, there a problem while creating product.');
+         if($request->status)
+           {
+                $status = 1;
+           }
+           else
+           {
+            $status = 0;
+           }
+
+        $result = Product::create([
+            'name' => $request->name,
+            'description' => $request->desc,
+            'price' => $request->price,
+            'quantity' => $request->quantity,
+            'tax' => $request->tax,
+            'category_id' => $request->category_id,
+            'brand_id' => $request->brands,
+            'status' => $status,
+
+        ]);
+
+        if($result)
+        {
+            return back()->with('success','Product Added Successfully');
         }
-        return redirect()->route('products.index')->with('success', 'Success, you product have been created.');
+        else
+        {
+            return back()->with('success','Whoops! Something went wrong please try again.');
+        }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
     public function show(Product $product)
@@ -83,62 +105,88 @@ class ProductController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
     public function edit(Product $product)
     {
-        return view('products.edit')->with('product', $product);
+        $category = Category::all();
+        return view('backend.product.create',compact('product','category'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Product  $product
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductUpdateRequest $request, Product $product)
+    public function update(Request $request, Product $product)
     {
-        $product->name = $request->name;
-        $product->description = $request->description;
-        $product->barcode = $request->barcode;
-        $product->price = $request->price;
-        $product->quantity = $request->quantity;
-        $product->status = $request->status;
+        // dd($request->all());
+           $request->validate([
+            'name' => 'required',
+            'desc' => 'required',
+            'price' => 'required',
+            'quantity' => 'required|integer',
+            'tax' => 'required|integer',
+            'category_id' => 'required|integer',
+            'brands' => 'required|integer',
+            
+        ]);
+            if($request->status)
+           {
+                $status = 1;
+           }
+           else
+           {
+            $status = 0;
+           }
 
-        if ($request->hasFile('image')) {
-            // Delete old image
-            if ($product->image) {
-                Storage::delete($product->image);
+            $product->name = $request->name;
+            $product->description = $request->desc;
+            $product->price = $request->price;
+            $product->quantity = $request->quantity;
+            $product->tax = $request->tax;
+            $product->category_id = $request->category_id;
+            $product->brand_id = $request->brands;
+            $product->status = $status;
+
+            if($product->update())
+            {
+                return back()->with('success','Product updated Successfully');
             }
-            // Store image
-            $image_path = $request->file('image')->store('products', 'public');
-            // Save to Database
-            $product->image = $image_path;
-        }
-
-        if (!$product->save()) {
-            return redirect()->back()->with('error', 'Sorry, there\'re a problem while updating product.');
-        }
-        return redirect()->route('products.index')->with('success', 'Success, your product have been updated.');
+            else
+            {
+                return back()->with('success','Product cannot be updated. Try Again!');   
+            }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Product  $product
+     * @param  \App\Product  $product
      * @return \Illuminate\Http\Response
      */
     public function destroy(Product $product)
     {
-        if ($product->image) {
-            Storage::delete($product->image);
+        
+        if($product->delete())
+        {
+            return back()->with("success",'Product Deleted Successfully');
         }
-        $product->delete();
+        else
+        {
+            return back()->with('success','Product cannot be deleted now..!!');
+        }
+    }
 
-        return response()->json([
-            'success' => true
-        ]);
+
+    public function category_brands($category)
+    {
+       
+            $brands = Brand::where('category_id' ,'=', $category)->get();
+            return response()->json($brands);
+        
     }
 }

@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
-use App\Models\Customer;
+use App\Order;
+use App\Product;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -24,25 +28,16 @@ class HomeController extends Controller
      * @return \Illuminate\Contracts\Support\Renderable
      */
     public function index()
-    {
-        $orders = Order::with(['items', 'payments'])->get();
-        $customers_count = Customer::count();
+    {  
+        // dd(Carbon::today());    
+       $user = User::where('email','!=','admin@gmail.com')->inRandomOrder()->take(4)->get();
+       $dailysales = count(Order::whereDate('created_at','=',Carbon::today())->get());
+       $revenue_today =  DB::table('orders')->selectRaw('sum(total_amount)')->whereDate('created_at',Carbon::today())->pluck('sum(total_amount)');
+       $products = count(Product::where('quantity','>',0)->orWhere('status','=','active')->get());
+       // dd($products);
 
-        return view('home', [
-            'orders_count' => $orders->count(),
-            'income' => $orders->map(function($i) {
-                if($i->receivedAmount() > $i->total()) {
-                    return $i->total();
-                }
-                return $i->receivedAmount();
-            })->sum(),
-            'income_today' => $orders->where('created_at', '>=', date('Y-m-d').' 00:00:00')->map(function($i) {
-                if($i->receivedAmount() > $i->total()) {
-                    return $i->total();
-                }
-                return $i->receivedAmount();
-            })->sum(),
-            'customers_count' => $customers_count
-        ]);
+      
+       
+        return view('backend.index',compact('user','dailysales','revenue_today','products'));
     }
 }

@@ -1,93 +1,37 @@
-<p align="center">
-    <h1 align="center">POS System Using Laravel</h1>
-</p>
+<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg">Best Price</p>
 
-The project was created while recording video "Create POS System Using Laravel"
 
-## Installation
+## About Point of Sale
 
-### Requirements
+Point of sale is a web application Develope with one of the finest Framework Laravel. Its for those who want  fast reliable item selling shop for their business and shops with beautiful design frontend and backend to manage everything with ease at finger tips, such as:
 
-For system requirements you [Check Laravel Requirement](https://laravel.com/docs/8.x/deployment#server-requirements)
+1) Product Management
+2) Category Management
+3) User Management
+4) Roles And Permissions
+5) Order and Order states and status 
+6) Each and everything is at ur finger tips with friendly user interface
+7) Dynamic order taking with Discount,tax automatic calculation.
+8) Invoice generation.
+## Much more to explore
 
-### Clone the repository from github.
 
-    git clone https://github.com/angkosal/laravel-pos.git [YourDirectoryName]
 
-The command installs the project in a directory named `YourDirectoryName`. You can choose a different
-directory name if you want.
+## Release Information
 
-### Install dependencies
 
-Laravel utilizes [Composer](https://getcomposer.org/) to manage its dependencies. So, before using Laravel, make sure you have Composer installed on your machine.
+This Project is the v.1 with all the major functionalities Implemented .
+ To Start this release please perform following Steps;
 
-    cd YourDirectoryName
-    composer install
+1) Make Database with name "pos"
+2) Then run "php artisan migrate --seed" in terminal.
+3) Hit Url "http://localhost/pos/"
+4) Boom You are done!! Enjoy
 
-### Config file
+## PHP version 7.0 or newer is recommended.
 
-Rename or copy `.env.example` file to `.env` 1.`php artisan key:generate` to generate app key.
+It should work on 7.0 as well, but we strongly advise you NOT to run
+such old versions of PHP, because of potential security and performance
+issues, as well as missing features.
 
-1. Set your database credentials in your `.env` file
-1. Set your `APP_URL` in your `.env` file.
-
-### Database
-
-1. Migrate database table `php artisan migrate`
-1. Generate config `php artisan db:seed`
-
-### Install Node Dependencies(optional)
-
-1. `npm install` to install node dependencies
-1. `npm run dev` to build our javascript
-
-### Create Admin Account
-
-1. `php artisan tinker` and than paste
-    ```php
-    App\Models\User::create([
-        'first_name' => 'Admin',
-        'last_name' => 'admin',
-        'email'=>'admin@gmail.com',
-        'password' => bcrypt('admin')
-    ]);
-    ```
-    hit enter.
-
-### Create storage link
-
-`php artisan storage:link`
-
-### Run Server
-
-1. `php artisan serve` or Laravel Homestead
-1. Visit `localhost:8000` in your browser
-1. Visit `/admin` if you want to access the admin. Email: `admin@gmail.com`, Password: `admin`.
-
-### Screenshots
-
-#### Product list
-
-![SS](https://raw.githubusercontent.com/angkosal/laravel-pos/master/screenshots/products_list.png)
-
-#### Create order
-
-![SS](https://raw.githubusercontent.com/angkosal/laravel-pos/master/screenshots/pos.png)
-
-#### Order list
-
-![SS](https://raw.githubusercontent.com/angkosal/laravel-pos/master/screenshots/order_list.png)
-
-#### Customer list
-
-![SS](https://raw.githubusercontent.com/angkosal/laravel-pos/master/screenshots/customer_list.png)
-
-## Donation
-
-Support this projects (Cambodia).
-
-<img src="https://adscom.biz/wp-content/uploads/2017/02/ABA-logo-no-padding.png" alt="ABA logo" width="150px" />
-
-#### ORNG SORL
-
-#### 000 294 471
+## PR's are welcome
