@@ -14,7 +14,7 @@
                     <!-- item-->
                     <a href="javascript:void(0);" class="dropdown-item notify-item">
                         <i class="fe-user mr-1"></i>
-                        <span>My Account</span>
+                        <span>Mi Cuenta</span>
                     </a>
 
                     <!-- item-->
@@ -69,7 +69,7 @@
 
             <ul class="metismenu" id="side-menu">
 
-                <li class="menu-title">Navigation</li>
+                <li class="menu-title">MENU</li>
 
                 <li>
                     <a href="{{route('home')}}">
@@ -84,12 +84,12 @@
                 <li>
                     <a href="javascript: void(0);">
                         <i class="ti-flag"></i>
-                        <span> Product</span>
+                        <span> Productos</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('product.index')}}">View</a></li>
-                        <li><a href="{{route('product.create')}}">Create</a></li>
+                        <li><a href="{{route('product.index')}}">Ver</a></li>
+                        <li><a href="{{route('product.create')}}">Crear</a></li>
 
                     </ul>
                 </li>
@@ -101,12 +101,12 @@
                 <li>
                     <a href="javascript: void(0);">
                         <i class="ti-flag"></i>
-                        <span> Orders</span>
+                        <span> Ventas</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('order.index')}}">View</a></li>
-                        <li><a href="{{route('order.create')}}">Create</a></li>
+                        <li><a href="{{route('order.index')}}">Ver</a></li>
+                        <li><a href="{{route('order.create')}}">Crear</a></li>
 
                     </ul>
                 </li>
@@ -120,11 +120,11 @@
                 <li>
                     <a href="javascript: void(0);">
                         <i class="ti-flag"></i>
-                        <span>Customer</span>
+                        <span>Clientes</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('customer.index')}}">View</a></li>
+                        <li><a href="{{route('customer.index')}}">Ver</a></li>
 
                     </ul>
                 </li>
@@ -138,12 +138,12 @@
                 <li>
                     <a href="javascript: void(0);">
                         <i class="ti-user"></i>
-                        <span> User</span>
+                        <span> Usuarios</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('user.index')}}">View</a></li>
-                        <li><a href="{{route('user.create')}}">Create</a></li>
+                        <li><a href="{{route('user.index')}}">Ver</a></li>
+                        <li><a href="{{route('user.create')}}">Crear</a></li>
                         {{-- <li><a href="ui-draggable-cards.html">Draggable Cards</a></ --}}
                     </ul>
                 </li>
@@ -159,8 +159,8 @@
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('role.index')}}">View</a></li>
-                        <li><a href="{{route('role.create')}}">Create</a></li>
+                        <li><a href="{{route('role.index')}}">Ver</a></li>
+                        <li><a href="{{route('role.create')}}">Crear</a></li>
                         {{-- <li><a href="ui-draggable-cards.html">Draggable Cards</a></ --}}
                     </ul>
                 </li>
@@ -172,12 +172,12 @@
                 <li>
                     <a href="javascript: void(0);">
                         <i class="ti-flag"></i>
-                        <span> Permissions</span>
+                        <span> Permisos</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('permission.index')}}">View</a></li>
-                        <li><a href="{{route('permission.create')}}">Create</a></li>
+                        <li><a href="{{route('permission.index')}}">Ver</a></li>
+                        <li><a href="{{route('permission.create')}}">Crear</a></li>
                         {{-- <li><a href="ui-draggable-cards.html">Draggable Cards</a></ --}}
                     </ul>
                 </li>
@@ -190,12 +190,12 @@
                 <li>
                     <a href="javascript: void(0);">
                         <i class="ti-flag"></i>
-                        <span> Category</span>
+                        <span> Categorias</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('category.index')}}">View</a></li>
-                        <li><a href="{{route('category.create')}}">Create</a></li>
+                        <li><a href="{{route('category.index')}}">Ver</a></li>
+                        <li><a href="{{route('category.create')}}">Crear</a></li>
                         {{-- <li><a href="ui-draggable-cards.html">Draggable Cards</a></ --}}
                     </ul>
                 </li>
@@ -208,12 +208,12 @@
                 <li>
                     <a href="javascript: void(0);">
                         <i class="ti-flag"></i>
-                        <span> Brands</span>
+                        <span> Marcas</span>
                         <span class="menu-arrow"></span>
                     </a>
                     <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('brand.index')}}">View</a></li>
-                        <li><a href="{{route('brand.create')}}">Create</a></li>
+                        <li><a href="{{route('brand.index')}}">Ver</a></li>
+                        <li><a href="{{route('brand.create')}}">Crear</a></li>
                         {{-- <li><a href="ui-draggable-cards.html">Draggable Cards</a></ --}}
                     </ul>
                 </li>
