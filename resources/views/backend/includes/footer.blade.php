@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                2016 - {{ date('Y') }} &copy; {{ config('app.name') }} theme by <a href="#">Softanddata</a>
+                2019 - {{ date('Y') }} &copy; {{ config('app.name') }} theme by <a href="#">Softanddata</a>
             </div>
             <div class="col-md-6">
                 <div class="text-md-right footer-links d-none d-sm-block">
