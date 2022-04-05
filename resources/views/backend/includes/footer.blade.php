@@ -3,13 +3,13 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-6">
-                2016 - {{ date('Y') }} &copy; {{ config('app.name') }} theme by <a href="#">Zain</a>
+                2019 - {{ date('Y') }} &copy; {{ config('app.name') }} theme by <a href="#">Softanddata</a>
             </div>
             <div class="col-md-6">
                 <div class="text-md-right footer-links d-none d-sm-block">
-                    <a href="javascript:void(0);">About Us</a>
-                    <a href="javascript:void(0);">Help</a>
-                    <a href="javascript:void(0);">Contact Us</a>
+                    <a href="javascript:void(0);">Acerca de nosotros</a>
+                    <a href="javascript:void(0);">Ayuda</a>
+                    <a href="javascript:void(0);">Contactanos</a>
                 </div>
             </div>
         </div>
