@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>{{ config('app.name') }} - Dashboard LOGIN</title>
+    <title>{{ config('app.name') }} - Ingreso Personal</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="POS login" name="description" />
     <meta content="Coderthemes" name="author" />
@@ -32,26 +32,26 @@
                 <div class="col-md-8 col-lg-6 col-xl-5">
                     <div class="text-center">
                         <a href="/" style="font-size:28px;">
-                            {{-- <span><img src="{{asset('theme/assets/images/logo-dark.png')}}" alt="" height="22"></span> --}}
-                            LOGO
+                             <span><img src="{{asset('theme/assets/images/logo-dark.png')}}" alt="" height="22"></span> 
+                            
                         </a>
-                        <p class="text-muted mt-2 mb-4">Responsive Admin Dashboard</p>
+                        <p class="text-muted mt-2 mb-4">PHArmacy POS V-1.0.0-alpha</p>
                     </div>
                     <div class="card">
 
                         <div class="card-body p-4">
 
                             <div class="text-center mb-4">
-                                <h4 class="text-uppercase mt-0">Sign In</h4>
+                                <h4 class="text-uppercase mt-0">Ingresar</h4>
                             </div>
 
                             <form method="POST" action="{{ route('login') }}">
                                 @csrf
                                 <div class="form-group mb-3">
-                                    <label for="emailaddress">Email address</label>
+                                    <label for="emailaddress">Correo</label>
                                     <input class="form-control @error('email') is-invalid @enderror()" type="text"
                                         name="email" id="emailaddress" required="" value="{{old('email')}}"
-                                        placeholder="Enter your email">
+                                        placeholder="Ingresa tu correo">
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -60,9 +60,9 @@
                                 </div>
 
                                 <div class="form-group mb-3">
-                                    <label for="password">Password</label>
+                                    <label for="password">Contraseña (otorgada por el admin)</label>
                                     <input class="form-control @error('password') is-invalid @enderror()"
-                                        type="password" name="password" id="password" placeholder="Enter your password">
+                                        type="password" name="password" id="password" placeholder="Ej: 1234">
 
                                     @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -75,12 +75,12 @@
                                     <div class="custom-control custom-checkbox">
                                         <input class="form-check-input" type="checkbox" name="remember" id="remember"
                                             {{ old('remember') ? 'checked' : '' }}>
-                                        <label class="custom-control-label" for="checkbox-signin">Remember me</label>
+                                        <label class="custom-control-label" for="checkbox-signin">Recuerdame</label>
                                     </div>
                                 </div>
 
                                 <div class="form-group mb-0 text-center">
-                                    <button class="btn btn-primary btn-block" type="submit"> Log In </button>
+                                    <button class="btn btn-primary btn-block" type="submit"> Entrar </button>
                                 </div>
 
                             </form>
@@ -93,7 +93,7 @@
                         <div class="col-12 text-center">
                             @if (Route::has('password.request'))
                             <a href="{{ route('password.request') }}" class="text-muted ml-1"><i
-                                    class="fa fa-lock mr-1"></i>Forgot your password?</a>
+                                    class="fa fa-lock mr-1"></i>Olvido su contraseña?</a>
                             @endif
                         </div> <!-- end col -->
                     </div>
