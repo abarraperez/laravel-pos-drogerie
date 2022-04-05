@@ -1,14 +1,19 @@
-<div class="left-side-menu">
+<style>
+    .content-page{
+        margin-left: 0px !important;
+        margin-top: 0px !important;
+    }
+    </style>
+<div class="horizontal-side-menu">
 
-    <div class="slimscroll-menu">
+    <div class="slimscroll-menu" style="">
 
         <!-- User box -->
         <div class="user-box text-center">
             <img src="{{asset('images/'.Auth::user()->thumbnail)}}" alt="user-img" title="Mat Helme"
                 class="rounded-circle img-thumbnail avatar-lg">
             <div class="dropdown">
-                <a href="#" class="text-dark dropdown-toggle h5 mt-2 mb-1 d-block"
-                    data-toggle="dropdown">{{uppercase(Auth::user()->name)}}</a>
+                
                 <div class="dropdown-menu user-pro-dropdown">
 
                     <!-- item-->
@@ -43,190 +48,103 @@
 
                 </div>
             </div>
-            <p class="text-muted">
-                @foreach (Auth::user()->role as $roles)
-                {{$roles->name}},
-                @endforeach
-            </p>
+           
 
-            <ul class="list-inline">
-                <li class="list-inline-item">
-                    <a href="#" class="text-muted">
-                        <i class="mdi mdi-settings"></i>
-                    </a>
-                </li>
-
-                <li class="list-inline-item">
-                    <a href="#" class="text-custom">
-                        <i class="mdi mdi-power"></i>
-                    </a>
-                </li>
-            </ul>
+            
         </div>
 
         <!--- Sidemenu -->
-        <div id="sidebar-menu">
+        <div class="topnav" style="height: 185px; overflow: hidden; width: auto;"><div class="container-fluid">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Menu</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="{{route('home')}}"> 
+            <i class="mdi mdi-view-dashboard"></i>Dashboard <span class="sr-only">(current)</span>
+        </a>
+      </li>
 
-            <ul class="metismenu" id="side-menu">
+      @can('view-customer', User::class)
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-address-book "></i> Clientes <i class="fa fa-angle-down"></i>
+        </a>
+        <div class="dropdown-menu "  aria-labelledby="topnav-ui">
+          <a class="dropdown-item"  href="{{route('customer.index')}}">Ver</a>
+        </div>
+      </li>
+      @endcan
 
-                <li class="menu-title">MENU</li>
-
-                <li>
-                    <a href="{{route('home')}}">
-                        <i class="mdi mdi-view-dashboard"></i>
-                        <span> Dashboard </span>
-                    </a>
-                </li>
-
-                @can('view-product', User::class)
-
-
-                <li>
-                    <a href="javascript: void(0);">
-                        <i class="ti-flag"></i>
-                        <span> Productos</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('product.index')}}">Ver</a></li>
-                        <li><a href="{{route('product.create')}}">Crear</a></li>
-
-                    </ul>
-                </li>
-                @endcan
-
-                @can('view-order', User::class)
-
-
-                <li>
-                    <a href="javascript: void(0);">
-                        <i class="ti-flag"></i>
-                        <span> Ventas</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('order.index')}}">Ver</a></li>
-                        <li><a href="{{route('order.create')}}">Crear</a></li>
-
-                    </ul>
-                </li>
-                @endcan
-
-
-
-                @can('view-customer', User::class)
-
-
-                <li>
-                    <a href="javascript: void(0);">
-                        <i class="ti-flag"></i>
-                        <span>Clientes</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('customer.index')}}">Ver</a></li>
-
-                    </ul>
-                </li>
-                @endcan
-
-
-
-                @can('view-user', User::class)
-                {{-- expr --}}
-
-                <li>
-                    <a href="javascript: void(0);">
-                        <i class="ti-user"></i>
-                        <span> Usuarios</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('user.index')}}">Ver</a></li>
-                        <li><a href="{{route('user.create')}}">Crear</a></li>
-                        {{-- <li><a href="ui-draggable-cards.html">Draggable Cards</a></ --}}
-                    </ul>
-                </li>
-                @endcan
-
-                @can('view-role', User::class)
-                {{-- expr --}}
-
-                <li>
-                    <a href="javascript: void(0);">
-                        <i class="ti-crown"></i>
-                        <span> Roles </span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('role.index')}}">Ver</a></li>
-                        <li><a href="{{route('role.create')}}">Crear</a></li>
-                        {{-- <li><a href="ui-draggable-cards.html">Draggable Cards</a></ --}}
-                    </ul>
-                </li>
-                @endcan
-
-                @can('view-permission', User::class)
-                {{-- expr --}}
-
-                <li>
-                    <a href="javascript: void(0);">
-                        <i class="ti-flag"></i>
-                        <span> Permisos</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('permission.index')}}">Ver</a></li>
-                        <li><a href="{{route('permission.create')}}">Crear</a></li>
-                        {{-- <li><a href="ui-draggable-cards.html">Draggable Cards</a></ --}}
-                    </ul>
-                </li>
-                @endcan
-
-
-                @can('view-category', User::class)
-                {{-- expr --}}
-
-                <li>
-                    <a href="javascript: void(0);">
-                        <i class="ti-flag"></i>
-                        <span> Categorias</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('category.index')}}">Ver</a></li>
-                        <li><a href="{{route('category.create')}}">Crear</a></li>
-                        {{-- <li><a href="ui-draggable-cards.html">Draggable Cards</a></ --}}
-                    </ul>
-                </li>
-                @endcan
-
-
-                @can('view-brands', User::class)
-                {{-- expr --}}
-
-                <li>
-                    <a href="javascript: void(0);">
-                        <i class="ti-flag"></i>
-                        <span> Marcas</span>
-                        <span class="menu-arrow"></span>
-                    </a>
-                    <ul class="nav-second-level" aria-expanded="false">
-                        <li><a href="{{route('brand.index')}}">Ver</a></li>
-                        <li><a href="{{route('brand.create')}}">Crear</a></li>
-                        {{-- <li><a href="ui-draggable-cards.html">Draggable Cards</a></ --}}
-                    </ul>
-                </li>
-                @endcan
-
-
-
-
-
-
-            </ul>
+      @can('view-product', User::class)
+      <li class="dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-pills"></i> Productos <i class="fa fa-angle-down"></i>
+        </a>
+        <div class="dropdown-menu mega-dropdown-menu dropdown-mega-menu-xl" aria-labelledby="navbarDropdownMenuLink">
+            <div class="row">
+                <div class="col-lg-6">
+                    <a class="dropdown-item notify-item" href="{{route('product.index')}}">Ver todo</a>
+                    <a class="dropdown-item notify-item" href="{{route('product.create')}}">Crear nuevo</a>
+                    <a class="dropdown-item notify-item" href="{{route('product.index')}}">Carga masiva</a>
+                </div>
+                <!--<div class="col-lg-6">
+                    <a class="dropdown-item notify-item" href="{{route('product.index')}}">Ver</a>
+                    <a class="dropdown-item notify-item" href="{{route('product.create')}}">Crear</a>
+                    <a class="dropdown-item notify-item" href="{{route('product.index')}}">Ver</a>
+                </div>-->
+            </div>
 
         </div>
+      </li>
+      @endcan
+      @can('view-order', User::class)
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-balance-scale"></i> Ventas <i class="fa fa-angle-down"></i>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{{route('order.index')}}">Ver Todas</a>
+          <a class="dropdown-item" href="{{route('order.create')}}">Punto de venta</a>
+        </div>
+      </li>
+      @endcan
+      
+    @can('view-user', User::class)
+                {{-- expr --}}
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fa fa-cogs"></i> Configuracion <i class="fa fa-angle-down"></i>
+            </a>
+            <!--<div class="dropdown-menu" aria-labelledby="topnav-ui">
+                <a class="dropdown-item" href="{{route('user.index')}}"><i class="fa fa-users"></i> Usuariosx</a>
+                {{-- <a href="ui-draggable-cards.html">Draggable Cards</a> --}}
+            </div>-->
+            <div class="dropdown-menu mega-dropdown-menu dropdown-mega-menu-xl" aria-labelledby="navbarDropdownMenuLink">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <a class="dropdown-item notify-item" href="{{route('user.index')}}">  Usuarios</a>
+                        <a class="dropdown-item notify-item" href="{{route('role.index')}}">Roles</a>
+                        <a class="dropdown-item notify-item" href="{{route('permission.index')}}">Permisos</a>
+                    </div>
+                    <div class="col-lg-6">
+                        <a class="dropdown-item notify-item" href="{{route('category.index')}}">  Categorias</a>
+                        <a class="dropdown-item notify-item"  href="{{route('brand.index')}}">Marcas</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </li>
+    @endcan
+  
+    </ul>
+  </div>
+</nav>
+</div>
+</div>
         <!-- End Sidebar -->
 
         <div class="clearfix"></div>
