@@ -12,11 +12,33 @@
 
                     <!-- Start Content-->
                     <div class="container-fluid">
-
                         <div class="row">
                             <div class="col-12">
                                 <div class="card-box">
-                                    <h2>Users</h2>
+                                    <!-- begin Search form-->
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <form class="form-inline" action="#" method="get">
+                                                <div class="form-group mb-12">
+                                                    <label for="inputPassword2" class="sr-only">Buscar</label>
+                                                    <input type="text" class="form-control" id="inputPassword2" placeholder="Buscar" name="search">
+                                                </div>
+                                                <button type="submit" class="btn btn-primary mb-6">Buscar</button>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-3  col-lg-offset-3">
+
+                                            <a href="{{route('user.create')}}" class="btn btn-success">+ Agregar Nuevo </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>     
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="card-box">
+                                    <h2>UsuariosX</h2>
                                     <div class="responsive-table-plugin" style="padding-bottom: 15px;">
                                         @if (Session::has('success'))
                                             <div class="alert alert-success">
