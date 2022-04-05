@@ -14,7 +14,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-box">
-                                    <h2 class="mt-0 mb-3">Product</h2>
+                                    <h2 class="mt-0 mb-3">Creando Producto</h2>
                                     @if (Session::has('success'))
                                         {{-- expr --}}
                                     
@@ -31,8 +31,12 @@
                                     @endif
 
                                         @csrf
+                                        <div class="row">
+                                        <div class="col-lg-6">
+
+                                        
                                         <div class="form-group">
-                                            <label>Name</label>
+                                            <label>Nombre</label>
                                             <input type="text" class="form-control" name="name" ="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Name" @if (isset($product->name)) value="{{$product->name}}" @else value="{{old('name')}}")
                                                 
                                            
@@ -46,8 +50,9 @@
                                             </span>
                                             @enderror()
                                         </div>
+                                        
                                          <div class="form-group">
-                                            <label>Description</label>
+                                            <label>Descripcion</label>
                                             <textarea name="desc" id="input" class="form-control" rows="3" )
                                                 
                                            
@@ -67,7 +72,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Price</label>
+                                            <label>Precio</label>
                                            <input type="number" name="price" class="form-control" @if (isset($product->price)) value="{{$product->price}}" @else value="{{old('price')}}")
                                                 
                                            
@@ -83,7 +88,7 @@
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Quantity</label>
+                                            <label>Stock Fisico</label>
                                            <input type="number" name="quantity" class="form-control" @if (isset($product->quantity)) value="{{$product->quantity}}" @else value="{{old('quantity')}}")
                                                 
                                            
@@ -97,9 +102,46 @@
                                             </span>
                                             @enderror()
                                         </div>
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="card" style="width: 18rem;">
+                                                <div class="card-header"> <h5 class="card-title">Alternativos</h5></div>
+                                                    <div class="card-body">
+                                                    <div class="alert alert-warning" role="alert">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                            <strong>Sin Alternativos!</strong> agregados a este producto.
+                                                    </div>
+                                                       
+                                                            <a href="#" class="btn btn-primary">+ Agregar</a>
+                                                        <!-- begin alert div -->
+                                                       
+                                                        
+                                                    </div>
+                                                </div>    
+                                            </div>
+                                            <div class="col-lg-6"> <div class="card" style="width: 18rem;">
+                                            <div class="card-header"> <h5 class="card-title">Bio-equivalentes</h5></div>
+                                                    <div class="card-body">
+                                                    <div class="alert alert-warning" role="alert">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                            <strong>Sin Bio-Equivalentes!</strong> agregados a este producto.
+                                                    </div>
+                                                       
+                                                            <a href="#" class="btn btn-primary">+ Agregar</a>
+                                                        <!-- begin alert div -->
+                                                       
+                                                    </div>
+                                                </div>    </div>
+                                        </div>
+                                        </div>
+                                        <div class="col-lg-6">
 
-                                    <div class="form-group">
-                                            <label>Tax (%)</label>
+                                        <div class="form-group">
+                                            <label>IVA (%)</label>
                                            <input type="number" name="tax" class="form-control" @if (isset($product->tax)) value="{{$product->tax}}" @else value="{{old('tax')}}")
                                                 
                                            
@@ -113,35 +155,66 @@
                                             </span>
                                             @enderror()
                                         </div>   
-                <label for="">Category</label>
-                
-                <select name="category_id" id="category" class="form-control" required="required">
-                    @if (isset($category))
-                       @foreach ($category as $cc)
-                           <option class="category_option" @if (isset($product) && $product->category_id == $cc->id) selected @endif value="{{$cc->id}}">{{$cc->name}}</option>
-                       @endforeach
-                    @endif
-                 
-                 </select>  
 
+                                       
 
-                 <label for="">Brands</label>
-                
-                <select name="brands" id="brands" class="form-control" required="required">
-                    
-                 
-                 </select>                                   
+                                        <label for="">Categoria</label>
+                                        <select name="category_id" id="category" class="form-control" required="required">
+                                            @if (isset($category))
+                                                @foreach ($category as $cc)
+                                                    <option class="category_option" @if (isset($product) && $product->category_id == $cc->id) selected @endif value="{{$cc->id}}">{{$cc->name}}</option>
+                                                @endforeach
+                                            @endif
+                                        </select>  
 
+                                        <label for="">Marca</label>
+                                        <select name="brands" id="brands" class="form-control" required="required"></select>                                   
+
+                                        <div class="form-group">
+                                            <label>Imagen</label>
+                                            <input type="file" name="image" class="form-control" >
+                                            @error('image')
+                                            <span>
+                                                <strong class="text-danger">{{$message}}</strong>
+                                            </span>
+                                            @enderror()    
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label>BARCODE</label>
+                                           <input type="number" name="tax" class="form-control" @if (isset($product->tax)) value="{{$product->tax}}" @else value="{{old('tax')}}")
+                                            
+                                            @endif>
                                         
 
-
-
-                                           
-
-                                      
-
-                                           
-                                           
+                                            @error('tax')
+                                            <span>
+                                                <strong class="text-danger">{{$message}}</strong>
+                                            </span>
+                                            @enderror()
+                                        </div>  
+                                        <div class="row">
+                                            <div class="col-lg-6">
+                                                <div class="card" style="width: 18rem;">
+                                                <div class="card-header"> <h5 class="card-title">Principios activos</h5></div>
+                                                    <div class="card-body">
+                                                    <div class="alert alert-warning" role="alert">
+                                                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                            <strong>Sin Princios activos!</strong> agregados a este producto.
+                                                    </div>
+                                                       
+                                                            <a href="#" class="btn btn-primary">+ Agregar</a>
+                                                        <!-- begin alert div -->
+                                                       
+                                                        
+                                                    </div>
+                                                </div>    
+                                            </div></div>
+                                        </div>   
+                                        </div>
+                                        
                                         <div class="card" style="margin-top: 20px;">
                                       <div class="card-header">Status</div>
                                             @error('status')
@@ -177,14 +250,11 @@
                                           
                                        </div>
 
-                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                        <button type="submit" class="btn btn-primary">+ Agregar</button>
                                     </form>
                                 </div>
                             </div>
                             <!-- end col -->
-
-                           
-
                         </div>
                         <!-- end row -->
                     

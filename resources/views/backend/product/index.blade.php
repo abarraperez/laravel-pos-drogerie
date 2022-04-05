@@ -17,7 +17,7 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card-box">
-                                    <h2>Products</h2>
+                                    <h2>Productos</h2>
                                     <div class="responsive-table-plugin" style="padding-bottom: 15px;">
                                         @if (Session::has('success'))
                                             <div class="alert alert-success">
@@ -31,16 +31,18 @@
                                                 <table id="tech-companies-1" class="table table-striped mb-0">
                                                     <thead>
                                                     <tr>
-                                                        <th>ID</th>
-                                                        <th data-priority="1">Name</th>
-                                                        <th>Category</th>
-                                                        <th>Brand</th>
-                                                        <th>Price</th>
-                                                        <th>Quantity</th>
-                                                        <th>Tax (%)</th>
+                                                        <th>#</th>
+                                                        <th>CODE</th>
+                                                        <th>Imagen</th>
+                                                        <th data-priority="1">Nombre</th>
+                                                        <th>Categoria</th>
+                                                        <th>Marca</th>
+                                                        <th>Precio</th>
+                                                        <th>Cant.</th>
+                                                        <th>IVA (%)</th>
                                                         <th>Status</th>
-                                                        <th>Edit</th>
-                                                        <th>Delete</th>
+                                                        <th></th>
+                                                        
                                                        
                                                     </tr>
                                                     </thead>
@@ -53,6 +55,8 @@
                                                      
                                                     <tr>
                                                         <th>{{$pp->id}}</th>
+                                                        <th></th>
+                                                        <th><img src="{{asset('storage/'.$pp->image)}}" width="50" height="50"></th>
                                                         <td>{{uppercase($pp->name)}}</td>
                                                         <td>{{$pp->category->name}}</td>
                                                         <td>{{$pp->brand->name}}</td>
@@ -61,8 +65,7 @@
                                                         <td>{{$pp->tax}}</td>
                                                         <td><span class="badge badge-{{check_class($pp->status)}}">{{uppercase(check_status($pp->status))}}</span></td>
                                                        
-                                                        <td><a href="{{url('product/'.$pp->id.'/edit')}}" class="btn btn-bordred-primary waves-effect  width-md waves-light">Edit</a></td>
-                                                        <td><p  onclick="event.preventDefault();document.getElementById('del-form-{{$pp->id}}').submit()" class="btn btn-bordred-danger waves-effect  width-md waves-light">Delete</p></td>
+                                                        <td><a href="{{url('product/'.$pp->id.'/edit')}}" class="btn btn-bordred-primary waves-effect  width-md waves-light">Edit</a><p  onclick="event.preventDefault();document.getElementById('del-form-{{$pp->id}}').submit()" class="btn btn-bordred-danger waves-effect  width-md waves-light">Delete</p></td>
 
                                                         <form id="del-form-{{$pp->id}}" action="{{url('product/'.$pp->id)}}" method="POST" style="display:none;">
                                                             @method('DELETE')
