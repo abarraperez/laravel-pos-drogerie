@@ -15,7 +15,22 @@ class CreateStoreBranchsTable extends Migration
     {
         Schema::create('store_branchs', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
+            $table->string('address');
+            $table->string('phone');
+            $table->string('email');
+            $table->string('website');
+            $table->string('logo');
+            $table->string('cover');
+            $table->string('description');
+            $table->string('latitude');
+            $table->string('longitude');
+            $table->string('status');
+            $table->string('slug');
+            $table->unsignedBigInteger('store_id');
+            $table->foreign('store_id')->references('id')->on('stores')->onDelete('cascade');
             $table->timestamps();
+
         });
     }
 
