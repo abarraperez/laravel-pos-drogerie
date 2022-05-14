@@ -15,6 +15,11 @@ class CreateProductActivePrinciplesTable extends Migration
     {
         Schema::create('product_active_principles', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('active_principle_id');
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('active_principle_id')->references('id')->on('active_principles');
+            
             $table->timestamps();
         });
     }

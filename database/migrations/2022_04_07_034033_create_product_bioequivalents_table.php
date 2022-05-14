@@ -15,6 +15,10 @@ class CreateProductBioequivalentsTable extends Migration
     {
         Schema::create('product_bioequivalents', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('bioequivalent_id');
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('bioequivalent_id')->references('id')->on('products');
             $table->timestamps();
         });
     }

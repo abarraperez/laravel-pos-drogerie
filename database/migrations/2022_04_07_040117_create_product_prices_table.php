@@ -15,6 +15,12 @@ class CreateProductPricesTable extends Migration
     {
         Schema::create('product_prices', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('product_id');
+            $table->bigInteger('price');
+            $table->string('price_type');
+            $table->date('price_end_date');
+            $table->string('status');
+            $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();
         });
     }

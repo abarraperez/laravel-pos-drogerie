@@ -15,6 +15,10 @@ class CreateProductSimilarsTable extends Migration
     {
         Schema::create('product_similars', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('similar_id');
+            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreign('similar_id')->references('id')->on('products');
             $table->timestamps();
         });
     }

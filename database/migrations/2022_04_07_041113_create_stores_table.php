@@ -26,7 +26,7 @@ class CreateStoresTable extends Migration
             $table->string('latitude');
             $table->string('longitude');
             $table->string('status');
-            $table->string('slug');
+            $table->string('slug');   
             $table->timestamps();
         });
     }
