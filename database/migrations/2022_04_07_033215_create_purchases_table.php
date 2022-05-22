@@ -14,7 +14,23 @@ class CreatePurchasesTable extends Migration
     public function up()
     {
         Schema::create('purchases', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->bigIncrements('id'); 
+            $table->string('name');
+            $table->string('number');
+            $table->string('address');
+            $table->string('phone');
+            $table->string('email');
+            $table->string('fax');
+            $table->string('contact');
+            $table->string('contact_phone');
+            $table->string('contact_email');
+            $table->string('contact_fax');
+            $table->string('contact_position');
+            $table->string('contact_department');
+            $table->string('contact_address');
+            
+
+
             $table->timestamps();
         });
     }
