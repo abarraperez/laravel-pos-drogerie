@@ -13,7 +13,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-box">
-                                    <h2 class="mt-0 mb-3">Creando Producto</h2>
+                                    <h2 class="mt-0 mb-3">{{ (isset($product))?'Editando':'Creando' }} Producto</h2>
                                     @if (Session::has('success'))
                                         <div class="alert alert-success">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -97,7 +97,7 @@
                                                         </span>
                                                     @enderror()
                                                 </div>
-
+                                                @if(isset($product))
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="card" style="width: 18rem;">
@@ -109,7 +109,7 @@
                                                                     </button>
                                                                     <strong>Sin Alternativos!</strong> agregados a este producto.
                                                                 </div>
-                                                                <button  v-on:click="openBioequivalentes=true" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalProductoAsociado">+ Agregar</button>
+                                                                <button  v-on:click="openModalSetType('openAlternativos')" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalProductoAsociado">+ Agregar</button>
                                                                 <!-- begin alert div -->    
                                                             </div>
                                                         </div>    
@@ -125,12 +125,13 @@
                                                                     </button>
                                                                     <strong>Sin Bio-Equivalentes!</strong> agregados a este producto.
                                                                 </div> 
-                                                                <a href="#" class="btn btn-primary">+ Agregar</a>
+                                                                <a  v-on:click="openModalSetType('openBioequivalentes')" href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalProductoAsociado">+ Agregar</a>
                                                                 <!-- begin alert div -->
                                                             </div>
                                                         </div>    
                                                     </div>
                                                 </div>
+                                                @endif
                                             </div>
                                             
                                             <div class="col-lg-6">
@@ -187,7 +188,7 @@
                                                         </span>
                                                     @enderror()
                                                 </div> 
-                                        
+                                            @if(isset($product))                                        
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="card" style="width: 18rem;">
@@ -199,13 +200,13 @@
                                                                     </button>
                                                                     <strong>Sin Princios activos!</strong> agregados a este producto.
                                                                 </div>
-                                                                <a href="#" class="btn btn-primary">+ Agregar</a>
+                                                                <a v-on:click="openModalSetType('openPrincipiosActivos')" href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalProductoAsociado">+ Agregar</a>
                                                                 <!-- begin alert div -->
                                                             </div>
                                                         </div>    
                                                     </div>
                                                 </div>   
-                                        
+                                            @endif
                                                 
                                             </div>
                                         </div>
@@ -222,8 +223,8 @@
                                         <h5 class="modal-title" id="exampleModalLabel">
                                             Agregando
                                             <i v-if="openBioequivalentes"> Bioequivalentes </i>
-                                            <i v-if="opneAlternativos"> Alternativos</i>
-                                            <i v-if="opnePrincipiosActivos"> Principios activos</i>
+                                            <i v-if="openAlternativos"> Alternativos</i>
+                                            <i v-if="openPrincipiosActivos"> Principios activos</i>
                                         </h5>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
@@ -233,8 +234,8 @@
                                         ...
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                        <button type="button" class="btn btn-primary">Save changes</button>
+                                        <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+                                        <button type="button" class="btn btn-primary">Guardar </button>
                                     </div>
                                 </div>    
                             </div>
@@ -252,10 +253,9 @@
                 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/axios@0.24.0/dist/axios.min.js"></script>
                 <script>
-                      $(document).ready(function(){
-
+                    $(document).ready(function(){
+                        //$('#modalProductoAsociado').modal({backdrop: 'static', keyboard: false})
                         var option  = $('#category option:selected').val();
-                   
                         $.ajax({
                             url : '{{URL::to('fetch/category_brands')}}/'+ option,
                             method:'GET',
@@ -330,8 +330,8 @@
                         errors: [],
                         selected: [],
                         openBioequivalentes: false,
-                        opneAlternativos: false,
-                        opnePrincipiosActivos:false,
+                        openAlternativos: false,
+                        openPrincipiosActivos:false,
                         selected_brand: [],
                         selected_category: [],
                         selected_product: [],
@@ -500,8 +500,24 @@
                         },
                         //method for user actions
                         openModalSetType(type){
-                            if(type == 'openBioequivalentes')
+                            if(type == 'openBioequivalentes'){
+
                                 this.openBioequivalentes = true;
+                                this.openAlternativos = false;
+                                this.openPrincipiosActivos = false;
+                            }
+                            else if(type == 'openAlternativos'){
+
+                                this.openAlternativos = true;
+                                this.openBioequivalentes = false;
+                                this.openPrincipiosActivos = false;
+                            }
+                            else if(type == 'openPrincipiosActivos'){
+
+                                this.openPrincipiosActivos = true;
+                                this.openBioequivalentes = false;
+                                this.openAlternativos = false;
+                            }
                         }
                     },
                 });

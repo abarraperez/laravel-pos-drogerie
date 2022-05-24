@@ -1,14 +1,14 @@
 <div id="wrapper">
 
     <!-- Topbar Start -->
-    <div class="navbar-custom">
+    <div class="navbar-custom" style="background-color:#2980B9;color:white">
         <ul class="list-unstyled topnav-menu float-right mb-0">
 
 
             <li class="dropdown notification-list">
                 <a class="nav-link dropdown-toggle  waves-effect" data-toggle="dropdown" href="#" role="button"
                     aria-haspopup="false" aria-expanded="false">
-                    <i class="fe-bell noti-icon"></i>
+                    <i class="fe-bell noti-icon" style="color:white"></i>
                     <span class="badge badge-danger rounded-circle noti-icon-badge">9</span>
                 </a>
                 <div class="dropdown-menu dropdown-menu-right dropdown-lg">
@@ -107,7 +107,7 @@
                 <a class="nav-link dropdown-toggle nav-user mr-0 waves-effect" data-toggle="dropdown" href="#"
                     role="button" aria-haspopup="false" aria-expanded="false">
                     <img src="{{asset('images/'.Auth::user()->thumbnail)}}" alt="user-image" class="rounded-circle">
-                    <span class="pro-user-name ml-1">
+                    <span class="pro-user-name ml-1" style="color:white">
                         {{ auth()->user()->name }} <i class="mdi mdi-chevron-down"></i>
                     </span>
                 </a>
@@ -156,7 +156,7 @@
             </li>
 
             <li>
-                <h4 class="page-title-main">Dashboard</h4>
+                <h4 class="page-title-main" style="color:white">Dashboard</h4>
             </li>
 
         </ul>

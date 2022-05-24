@@ -21,6 +21,7 @@
     <link href="{{asset('theme/assets/css/app.min.css')}}" rel="stylesheet" type="text/css" />
 
     <link href="{{asset('theme/assets/css/custom.css')}}" rel="stylesheet" type="text/css" />
+    
 
 </head>
 
