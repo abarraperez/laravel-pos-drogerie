@@ -154,7 +154,7 @@ class ProductController extends Controller
 
             if($product->update())
             {
-                return back()->with('success','Product updated Successfully');
+                return back()->with('Listo','Producto actualizado correctamente');
             }
             else
             {
@@ -188,5 +188,48 @@ class ProductController extends Controller
             $brands = Brand::where('category_id' ,'=', $category)->get();
             return response()->json($brands);
         
+    }
+    public function getSimilarProduct(Request $r)
+    {
+        $product = Product::find($r->product_id);
+        $similarsList = [];
+        foreach($product->alternativos as $alternativo)
+        {   
+            array_push($similarsList,$alternativo->similar);
+            //$similarsList[] = $alternativo->similar;
+        }
+        if(count($similarsList) > 0)
+        {
+            $similarsList  = (Object) $similarsList;
+            $response = array( 'success' => true, 'data' => $similarsList);
+             
+        
+        }else{
+            $response = array( 'error'=> true, 'message' => 'No hay productos alternaticos');
+           
+        }
+        
+        return response()->json($response);
+    }
+    public function getBioquivalentsProduct(Request $r)
+    {
+        $product = Product::find($r->product_id);
+        $bioquivalentsList = [];
+        foreach($product->bioequivalentes as $bioequivalente)
+        {   
+            array_push($bioquivalentsList,$bioequivalente->bioquivalente);
+            //$similarsList[] = $alternativo->similar;
+        }
+        
+        if(count($bioquivalentsList) > 0)
+        {
+            $bioquivalentsList  = (Object) $bioquivalentsList;
+            $response = array( 'success' => true, 'data' => $bioquivalentsList);     
+        
+        }else{
+            $response = array( 'error'=> true, 'message' => 'No hay productos bioquivalentes'); 
+        }
+        
+        return response()->json($response);
     }
 }
