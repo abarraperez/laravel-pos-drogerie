@@ -25,9 +25,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::group(['middleware' => 'auth'],function(){
 
-
+	
 	// ajax route
 	Route::get('fetch/category_brands/{category}','ProductController@category_brands');
+	Route::post('fetch/similar/products/','ProductController@getSimilarProduct');
+	Route::post('fetch/bioequivalentes','ProductController@getBioquivalentsProduct');
 	Route::get('fetch_products','OrderController@fetch_products');
 	Route::post('fetch_single_product','OrderController@fetch_single_product');
 	Route::post('fetch_customer','OrderController@fetch_customer');
