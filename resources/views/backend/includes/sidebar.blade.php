@@ -82,14 +82,14 @@
       @can('view-product', User::class)
       <li class="dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fa fa-pills"></i> Productos <i class="fa fa-angle-down"></i>
+        <i class="fa fa-pills"></i> Compras <i class="fa fa-angle-down"></i>
         </a>
         <div class="dropdown-menu mega-dropdown-menu dropdown-mega-menu-xl" aria-labelledby="navbarDropdownMenuLink">
             <div class="row">
                 <div class="col-lg-6">
-                    <a class="dropdown-item notify-item" href="{{route('product.index')}}">Ver todo</a>
-                    <a class="dropdown-item notify-item" href="{{route('product.create')}}">Crear nuevo</a>
-                    <a class="dropdown-item notify-item" href="{{route('product.index')}}">Carga masiva</a>
+                    <a class="dropdown-item notify-item" href="{{route('product.index')}}">Inventario</a>
+                    <a class="dropdown-item notify-item" href="{{route('product.create')}}">Ordenes de compra</a>
+                    <a class="dropdown-item notify-item" href="{{route('product.index')}}">Proovedores</a>
                 </div>
                 <!--<div class="col-lg-6">
                     <a class="dropdown-item notify-item" href="{{route('product.index')}}">Ver</a>
@@ -127,10 +127,11 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <a class="dropdown-item notify-item" href="{{route('user.index')}}">  Usuarios</a>
-                        <a class="dropdown-item notify-item" href="{{route('role.index')}}">Roles</a>
+                        <a class="dropdown-item notify-item" href="{{route('role.index')}}">Roles&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</a>
                         <a class="dropdown-item notify-item" href="{{route('permission.index')}}">Permisos</a>
                     </div>
                     <div class="col-lg-6">
+                        <a class="dropdown-item notify-item" href="{{route('product.index')}}">  Productos</a>
                         <a class="dropdown-item notify-item" href="{{route('category.index')}}">  Categorias</a>
                         <a class="dropdown-item notify-item"  href="{{route('brand.index')}}">Marcas</a>
                         
