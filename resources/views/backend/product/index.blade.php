@@ -17,7 +17,9 @@
                         <div class="row">
                             <div class="col-12">
                                 <div class="card-box">
-                                    <h2>Productos</h2>
+                                    <h2 style="color:#2980B9">PRODUCTOS</h2>
+                                    <a href="{{route('product.create')}}" class="btn btn-primary">Crear</a>
+                                    <a href="{{route('product.index')}}" class="btn btn-success">Carga masiva <i class="fa fa-file-excel"></i></a>
                                     <div class="responsive-table-plugin" style="padding-bottom: 15px;">
                                         @if (Session::has('success'))
                                             <div class="alert alert-success">
