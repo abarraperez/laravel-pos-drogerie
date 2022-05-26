@@ -20,4 +20,11 @@ class Product extends Model
     	return $this->belongsTo('App\Category');
     }
 
+    public function alternativos(){
+    	return $this->hasMany('App\ProductSimilar');
+    }
+
+    public function bioequivalentes(){
+    	return $this->hasMany('App\ProductBioequivalent');
+    }
 }
