@@ -25,10 +25,10 @@
 
 </head>
 
-<body>
+<body style="background-color:#bcc9d1">
 
 <!-- Pre-loader -->
-<div id="preloader">
+<div id="preloader" >
     <div id="status">
         <div class="spinner">Loading...</div>
     </div>
