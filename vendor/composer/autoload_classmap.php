@@ -40,6 +40,8 @@ return array(
     'App\\OrderProduct' => $baseDir . '/app/OrderProduct.php',
     'App\\Permission' => $baseDir . '/app/Permission.php',
     'App\\Product' => $baseDir . '/app/Product.php',
+    'App\\ProductBioequivalent' => $baseDir . '/app/ProductBioequivalent.php',
+    'App\\ProductSimilar' => $baseDir . '/app/ProductSimilar.php',
     'App\\Productfilter' => $baseDir . '/app/Productfilter.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',

@@ -13,7 +13,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card-box">
-                                    <h2 class="mt-0 mb-3">{{ (isset($product))?'Editando':'Creando' }} Producto</h2>
+                                    <h2 class="mt-0 mb-3">{{ (isset($product))?'Editando':'Creando' }} Producto <i class="fa fa-pills" style="color:#2980B9"></i></h2>
                                     @if (Session::has('success'))
                                         <div class="alert alert-success">
                                             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -83,7 +83,7 @@
                                                 </div>
 
                                                 <div class="form-group">
-                                                    <label>Stock Fisico</label>
+                                                    <label>Stock Inicial</label>
                                                     <input type="number" name="quantity" class="form-control" 
                                                         @if (isset($product->quantity)) 
                                                             value="{{$product->quantity}}" 
@@ -101,15 +101,23 @@
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="card" style="width: 18rem;">
-                                                            <div class="card-header"> <h5 class="card-title">Alternativos </h5></div>
-                                                            <div class="card-body">
-                                                                <div class="alert alert-warning" role="alert">
+                                                            <div class="card-header" style="background-color:#2980B9"> <h5 class="card-title" style="color:white">Alternativos <button  v-on:click="openModalSetType('openAlternativos')" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalProductoAsociado">+</button></h5> </div>
+                                                            <div class="card-body" style="max-height: 200px; overflow-y: auto;">
+
+                                                                <div v-if="!similarProducts" class="alert alert-warning" role="alert">
                                                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
                                                                     <strong>Sin Alternativos!</strong> agregados a este producto.
                                                                 </div>
-                                                                <button  v-on:click="openModalSetType('openAlternativos')" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalProductoAsociado">+ Agregar</button>
+                                                                <div v-else>
+                                                                    <div v-for="similar in similarProducts" class="alert alert-success" role="alert">
+                                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                        <strong>#CODE0024 - @{{similar.name}}</strong>
+                                                                    </div>
+                                                                </div>
                                                                 <!-- begin alert div -->    
                                                             </div>
                                                         </div>    
@@ -117,15 +125,23 @@
                                                 
                                                     <div class="col-lg-6"> 
                                                         <div class="card" style="width: 18rem;">
-                                                            <div class="card-header"> <h5 class="card-title">Bio-equivalentes</h5></div>
-                                                            <div class="card-body">
-                                                                <div class="alert alert-warning" role="alert">
+                                                            <div class="card-header" style="background-color:#2980B9"> <h5 class="card-title" style="color:white">Bio-equivalentes <a  v-on:click="openModalSetType('openBioequivalentes')" href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalProductoAsociado"> +</a></h5></div>
+                                                            <div class="card-body" style="max-height: 200px; overflow-y: auto;">
+                            
+                                                                <div v-if="bioequivalentes.length == 0" class="alert alert-warning" role="alert">
                                                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
                                                                     </button>
-                                                                    <strong>Sin Bio-Equivalentes!</strong> agregados a este producto.
+                                                                    <strong>Sin Bio-equivalentes!</strong> agregados a este producto.
                                                                 </div> 
-                                                                <a  v-on:click="openModalSetType('openBioequivalentes')" href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalProductoAsociado">+ Agregar</a>
+                                                                <div v-else>
+                                                                    <div v-for="bioequivalente in bioequivalentes" class="alert alert-success" role="alert">
+                                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                        <strong>#CODE0024 - @{{bioequivalente.name}}</strong>
+                                                                    </div>
+                                                                </div>
                                                                 <!-- begin alert div -->
                                                             </div>
                                                         </div>    
@@ -141,7 +157,7 @@
                                                             @if (isset($product->tax)) 
                                                                 value="{{$product->tax}}" 
                                                             @else 
-                                                                value="{{old('tax')}}"
+                                                                value="21"
                                                             @endif
                                                     >
                                                     @error('tax')
@@ -192,7 +208,7 @@
                                                 <div class="row">
                                                     <div class="col-lg-6">
                                                         <div class="card" style="width: 18rem;">
-                                                            <div class="card-header"> <h5 class="card-title">Principios activos</h5></div>
+                                                            <div class="card-header" style="background-color:#2980B9"> <h5 class="card-title" style="color:white">Principios activos <a v-on:click="openModalSetType('openPrincipiosActivos')" href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalProductoAsociado">+</a></h5></div>
                                                             <div class="card-body">
                                                                 <div class="alert alert-warning" role="alert">
                                                                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -200,7 +216,6 @@
                                                                     </button>
                                                                     <strong>Sin Princios activos!</strong> agregados a este producto.
                                                                 </div>
-                                                                <a v-on:click="openModalSetType('openPrincipiosActivos')" href="#" class="btn btn-primary" data-toggle="modal" data-target="#modalProductoAsociado">+ Agregar</a>
                                                                 <!-- begin alert div -->
                                                             </div>
                                                         </div>    
@@ -210,8 +225,8 @@
                                                 
                                             </div>
                                         </div>
-                                        
-                                        <button type="submit" class="btn btn-primary">+ Agregar</button>
+                                        <input type="hidden" name="status" value="1">
+                                        <button type="submit" class="btn btn-primary"><b> {{ (isset($product))?'ACTUALIZAR':'CREAR' }} </b></button>
                                     </form>
                                 </div>
                             </div>
@@ -231,7 +246,36 @@
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        ...
+                                        <div v-if="openBioequivalentes||openAlternativos">
+                                            <input type="text" class="form-control" placeholder="Buscar producto por nombre o codigo (minimo 4 letras)" v-model="queryParamsProducts" v-on:keyup="getQueryParams">
+                                            <table class="table" style="	overflow-y: scroll;">
+                                                <thead>
+                                                    <th>#</th>
+                                                    <th>Barcode</th>
+                                                    <th>Nombre</th>
+                                                    <th>Principios Activos</th>
+                                                    <th></th>
+                                                </thead>
+                                                <tbody>
+                                                    <tr v-for="(product, index) in products">
+                                                        <td>@{{ index + 1 }}</td>
+                                                        <td></td>
+                                                        <td>@{{ product.name }}</td>
+                                                        <td></td>
+                                                        <td>
+                                                            <button v-on:click="addProductRelation(product)" class="btn btn-primary">+</button>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                                </table>
+                                                <div class="alert alert-warning" role="alert" v-if="!products.length">
+                                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
+                                                    </button>
+                                                    <strong>Sin coincidencias!</strong>
+                                                </div>
+                                                <i  v-if="searchingProducts" class="fa fa-spinner fa-spin" style="text-align:center;display: inline-block;width: 100%;" aria-hidden="true"></i>
+                                        </div>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
@@ -246,10 +290,21 @@
                         
                 </div>
             </div>
-                    
+<style>
+    .form-control:hover{
+        border-color: #2980b9;
+    }
+    .form-control:focus{
+        border-color: #2980b9;
+        border-width: 2px;
+        box-shadow: 120px 80px 40px 20px #0ff;
+    }
+</style>
+
+
         @endsection
     
-              @section('scripts')
+        @section('scripts')
                 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/axios@0.24.0/dist/axios.min.js"></script>
                 <script>
@@ -328,6 +383,7 @@
                         products: [],
                         product: {},
                         errors: [],
+                        errorsInQueryProducts: [],
                         selected: [],
                         openBioequivalentes: false,
                         openAlternativos: false,
@@ -374,12 +430,21 @@
                         selected_product_lote_fecha_caducidad: [],
                         selected_product_lote_fecha_ingreso: [],
                         selected_product_lote_lote: [],
+                        similarProducts : null,
+                        bioequivalentes: [],
+                        queryParamsProducts: '',
+                        searchingProducts: false,
                     },
                     mounted() {
                        // alert('hola');
                         //this.getCategories();
                         //this.getBrands();
                         //this.getProducts();
+                        @if(isset($product))
+                            product = {!! $product !!};
+                            this.getSimilarProducts(product);
+                            this.getBioequivalentes(product);
+                        @endif
                     },
                     methods: {
                         getCategories() {
@@ -500,6 +565,9 @@
                         },
                         //method for user actions
                         openModalSetType(type){
+                            this.products = [];
+                            this.searchingProducts = false;
+                            this.queryParamsProducts = '';   
                             if(type == 'openBioequivalentes'){
 
                                 this.openBioequivalentes = true;
@@ -518,7 +586,105 @@
                                 this.openBioequivalentes = false;
                                 this.openAlternativos = false;
                             }
-                        }
+                        },
+                        getQueryParams(){
+                            //this.queryParamsProducts = queryParams;
+                            this.products = [];
+                            //console.log("getQueryParams");
+                            if(this.queryParamsProducts.length > 3){
+                                this.searchingProducts = true;
+                                this.queryProducts(this.queryParamsProducts);
+                            }else{
+                                this.searchingProducts = false;
+                            }
+                            
+                        },
+                        addProductRelation(product){
+                            this.errors = [];
+                            relation_type = '';
+                            if(this.openBioequivalentes && !this.openAlternativos)
+                                relation_type = 'bioequivalentes';
+                            else if(!openBioequivalentes && openAlternativos)
+                                relation_type = 'alternativos';
+                            
+                            axios.post('{{URL::to('add/product/relation')}}', {
+                                product_id: this.product.id,
+                                relation_id: product.id,
+                                relation_type: relation_type
+                            }).then(response => {
+                                if (response.data.errors) {
+                                    this.errors = response.data.errors;
+                                }
+                                if (response.data.success) {
+                                    //this.getProducts();
+                                   // this.product = {};
+                                    this.getBioequivalentes(this.product);
+                                    this.getSimilarProducts(this.product);
+                                }
+                            }).catch(error => {
+                                console.log(error);
+                            });
+                        },
+                        async getSimilarProducts(product) {
+                            this.errors = [];
+                            this.product = product;
+                            await axios.post('{{URL::to('fetch/similar/products')}}', {
+                                product_id: this.product.id,
+                            }).then(response => {
+                                if (response.data.errors) {
+                                    this.errors = response.data.errors;
+                                }
+                                if (response.data.success) {
+                                    this.similarProducts = response.data.data;
+                                    //console.log("Name:" + this.similarProducts);
+                                }
+                                /*this.similarProducts = response.data;
+                                console.log("33" + this.similarProducts[0].id);+/*/
+
+                                
+                            }).catch(error => {
+                                console.log(error);
+                            });
+                        },
+                        async getBioequivalentes(product) {
+                            this.errors = [];
+                            this.product = product;
+                            await axios.post('{{URL::to('fetch/bioequivalentes')}}', {
+                                product_id: this.product.id,
+                            }).then(response => {
+                                if (response.data.errors) {
+                                    this.errors = response.data.errors;
+                                }
+                                if (response.data.success) {
+                                    this.bioequivalentes = response.data.data;
+                                    console.log("Name:" + this.bioequivalentes);
+                                }
+                                
+                            }).catch(error => {
+                                console.log(error);
+                            });
+                        },
+                        async queryProducts(query) {
+                            this.errors = [];
+                            await axios.post('{{URL::to('query/products')}}', {
+                                query: query,
+                            }).then(response => {
+                                if (response.data.errors) {
+                                    this.errors = response.data.errors;
+                                }
+                                if (response.data.success) {
+                                    this.products = response.data.products;
+                                    console.log( response.data.products);
+                                }
+                                /*this.similarProducts = response.data;
+                                console.log("33" + this.similarProducts[0].id);+/*/
+                                
+                            }).catch(error => {
+                                console.log(error);
+                            }).finally(() => {
+                                this.searchingProducts = false;
+                            });
+                        },
                     },
                 });
 
@@ -526,4 +692,4 @@
                 
                 
                 </script>
-              @endsection
+            @endsection

@@ -444,6 +444,8 @@ class ComposerStaticInit9bd52a86ca3fbc3bc18b53f28790cdad
         'App\\OrderProduct' => __DIR__ . '/../..' . '/app/OrderProduct.php',
         'App\\Permission' => __DIR__ . '/../..' . '/app/Permission.php',
         'App\\Product' => __DIR__ . '/../..' . '/app/Product.php',
+        'App\\ProductBioequivalent' => __DIR__ . '/../..' . '/app/ProductBioequivalent.php',
+        'App\\ProductSimilar' => __DIR__ . '/../..' . '/app/ProductSimilar.php',
         'App\\Productfilter' => __DIR__ . '/../..' . '/app/Productfilter.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',

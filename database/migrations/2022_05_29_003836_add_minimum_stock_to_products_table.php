@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddMinimumAmountToProductsTable extends Migration
+class AddMinimumStockToProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,9 @@ class AddMinimumAmountToProductsTable extends Migration
     public function up()
     {
         Schema::table('products', function (Blueprint $table) {
-            $table->unsignedInteger('minimum_amount')->nullable();
             //
+            $table->integer('minimum_stock')->default(0);
+
         });
     }
 
@@ -27,9 +28,8 @@ class AddMinimumAmountToProductsTable extends Migration
     public function down()
     {
         Schema::table('products', function (Blueprint $table) {
-            
             //
-        });
+
         });
     }
 }

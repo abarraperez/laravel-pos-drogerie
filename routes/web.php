@@ -33,7 +33,9 @@ Route::group(['middleware' => 'auth'],function(){
 	Route::get('fetch_products','OrderController@fetch_products');
 	Route::post('fetch_single_product','OrderController@fetch_single_product');
 	Route::post('fetch_customer','OrderController@fetch_customer');
-	
+	Route::post('query/products','ProductController@query');
+	Route::post('add/product/relation','ProductController@add_product_relation');
+
 	// custom permission route
 	Route::get('permission/filter','PermissionController@filter')->name('permission.filter');
 	// Route::get('orders/filter','CustomerController@filter')->name('orders.filter');
