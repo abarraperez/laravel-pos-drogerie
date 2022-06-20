@@ -10,6 +10,7 @@
     <title>{{ config('app.name', 'POS-FARMA V.1.0') }}</title>
 
     <!-- Scripts -->
+   
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -73,6 +74,10 @@
         </nav>
 
         <main class="py-4">
+            @section('scripts')
+                <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+                <script src="https://cdn.jsdelivr.net/npm/axios@0.24.0/dist/axios.min.js"></script>
+            @endsection
             @yield('content')
         </main>
     </div>

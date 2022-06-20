@@ -42,7 +42,7 @@
                         <div class="card-body p-4">
 
                             <div class="text-center mb-4">
-                                <h4 class="text-uppercase mt-0">Ingresar</h4>
+                                <h4 class="text-uppercase mt-0">Administración</h4>
                             </div>
 
                             <form method="POST" action="{{ route('login') }}">
